@@ -26,21 +26,24 @@ class App extends React.Component<AppProp,AppState> {
   render() {
     const basePath = process.env.REACT_APP_CONTEXT;
       return (
-          <Router basename={basePath}>
-              <div>
-                  <nav style={{margin: '20px'}}>
-                      <Link to="/" style={{marginRight: '20px'}}>Home</Link>
-                      <Link to="/dashboard" style={{marginRight: '20px'}}>Dashboard</Link>
-                      <Link to="/listing">Listing</Link>
-                  </nav>
-                  <Routes>
-                      <Route path="/" element={<Home name={this.state.name}/>} />
-                      <Route path="/dashboard" element={<Dashboard />} />
-                      <Route path="/listing" element={<Listing />} />
-                      <Route path="*" element={<PageNotFound />} />
-                  </Routes>
-              </div>
-          </Router>
+        <Router basename={basePath}>
+        <div>
+            <nav style={{margin: '20px'}}>
+                <Link to="/" style={{marginRight: '20px'}}>Home</Link>
+                <Link to="/dashboard" style={{marginRight: '20px'}}>Dashboard</Link>
+                <Link to="/dashboard/listing">Listing</Link>
+            </nav>
+            <Routes>
+                <Route path="/dashboard/*">
+                      <Route index element={<Dashboard />} />
+                      <Route path='listing' element={<Listing />} />
+                </Route>
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<PageNotFound />} />
+            </Routes>
+        </div>
+      </Router>
+  
       )
   }
 }
