@@ -226,7 +226,7 @@ pipeline {
         STAGE_FLAG = "${STAGE_FLAG}"
         JENKINS_METADATA = "${JENKINS_METADATA}"
 
-        NODE_IMAGE = "node:20.11.1-slim"
+        NODE_IMAGE = "public.ecr.aws/lazsa/node:20.11.1"
         KUBECTL_IMAGE_VERSION = "bitnami/kubectl:1.28" //https://hub.docker.com/r/bitnami/kubectl/tags
         HELM_IMAGE_VERSION = "alpine/helm:3.8.1" //https://hub.docker.com/r/alpine/helm/tags   
         OC_IMAGE_VERSION = "quay.io/openshift/origin-cli:4.9.0" //https://quay.io/repository/openshift/origin-cli?tab=tags
