@@ -226,11 +226,10 @@ pipeline {
         STAGE_FLAG = "${STAGE_FLAG}"
         JENKINS_METADATA = "${JENKINS_METADATA}"
 
-        NODE_IMAGE = "circleci/node:16.13.1-bullseye-browsers" 
-        KUBECTL_IMAGE_VERSION = "bitnami/kubectl:1.24.9" //https://hub.docker.com/r/bitnami/kubectl/tags
+        NODE_IMAGE = "node:20.11.1-slim"
+        KUBECTL_IMAGE_VERSION = "bitnami/kubectl:1.28" //https://hub.docker.com/r/bitnami/kubectl/tags
         HELM_IMAGE_VERSION = "alpine/helm:3.8.1" //https://hub.docker.com/r/alpine/helm/tags   
         OC_IMAGE_VERSION = "quay.io/openshift/origin-cli:4.9.0" //https://quay.io/repository/openshift/origin-cli?tab=tags
-
     }
     stages {
         stage('Initialization') {
