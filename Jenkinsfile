@@ -323,7 +323,7 @@ pipeline {
                         if ("${list[i]}" == "'UnitTests'" && env.ACTION == 'DEPLOY') {
                             stage('Unit Tests') {
                                 sh """
-                                docker run --rm --user root -v "$WORKSPACE":/home/circleci/app $NODE_IMAGE /bin/bash -c "cd /home/circleci/app &&  npm install && npm test -- --watchAll=false"
+                                docker run --rm --user root -v "$WORKSPACE":/home/circleci/app $NODE_IMAGE /bin/bash -c "cd /home/circleci/app &&  npm install && npm test -- --watchAll=false && npm test:coverage -- --watchAll=false"
                                 sudo chown -R `id -u`:`id -g` "$WORKSPACE"
                                 """
                             }
