@@ -323,7 +323,7 @@ pipeline {
                         if ("${list[i]}" == "'UnitTests'" && env.ACTION == 'DEPLOY') {
                             stage('Unit Tests') {
                                 sh """
-                                docker run --rm --user root -v "$WORKSPACE":/home/circleci/app $NODE_IMAGE /bin/bash -c "cd /home/circleci/app &&  npm install && npm test -- --watchAll=false && npm test:coverage -- --watchAll=false"
+                                docker run --rm --user root -v "$WORKSPACE":/opt/repo -w /opt/repo $NODE_IMAGE /bin/bash -c "cd /opt/repo &&  npm install && npm test -- --watchAll=false && npm test:coverage -- --watchAll=false"
                                 sudo chown -R `id -u`:`id -g` "$WORKSPACE"
                                 """
                             }
@@ -342,7 +342,7 @@ pipeline {
                                           sed -i s+#SONAR_LOGIN#+$PASSWORD+g ./sonar-project.properties
                                           sed -i s+#RELEASE_NAME#+"${sonar_project_key}"+g ./sonar-project.properties
                                           sed -i s+#SONAR_ORGANIZATION#+"${metadataVars.sonarOrg}"+g ./sonar-project.properties
-                                          docker run --rm --user root -v "$WORKSPACE":/home/circleci/app $NODE_IMAGE /bin/bash -c "chown -R root:root /home/circleci/app && cd /home/circleci/app &&  npm install sonarqube-scanner -f && npm run sonar"
+                                          docker run --rm --user root -v "$WORKSPACE":/opt/repo -w /opt/repo $NODE_IMAGE /bin/bash -c "chown -R root:root /opt/repo &&  npm install sonarqube-scanner -f && npm run sonar"
                                           sudo chown -R `id -u`:`id -g` "$WORKSPACE"
                                         """
                                     }
@@ -354,7 +354,7 @@ pipeline {
                                          sed -i s+#SONAR_LOGIN#+$SONAR_AUTH_TOKEN+g ./sonar-project.properties
                                          sed -i s+#RELEASE_NAME#+"${sonar_project_key}"+g ./sonar-project.properties
                                          sed -i s+#SONAR_ORGANIZATION#+"${metadataVars.sonarOrg}"+g ./sonar-project.properties
-                                          docker run --rm --user root -v "$WORKSPACE":/home/circleci/app $NODE_IMAGE /bin/bash -c "chown -R root:root /home/circleci/app && cd /home/circleci/app &&  npm install sonarqube-scanner -f && npm run sonar"
+                                          docker run --rm --user root -v "$WORKSPACE":/opt/repo -w /opt/repo $NODE_IMAGE /bin/bash -c "chown -R root:root /opt/repo &&  npm install sonarqube-scanner -f && npm run sonar"
                                           sudo chown -R `id -u`:`id -g` "$WORKSPACE"
                                         """
                                     }
