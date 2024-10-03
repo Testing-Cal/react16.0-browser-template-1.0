@@ -1,15 +1,11 @@
-import React from "react";
-import Enzyme from "enzyme";
-import { shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import "jest-enzyme";
+import React from 'react';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom'; // for extended matchers
 import Dashboard from "../dashboard-page";
 
-jest.mock("highcharts/highcharts-3d");
-
-Enzyme.configure({ adapter: new Adapter() });
 describe("<Dashboard />", () => {
   it("renders <Dashboard /> component in root", () => {
-    shallow(<Dashboard />);
+    // Render the component
+    render(<Dashboard />);
   });
 });
